@@ -2,11 +2,16 @@
 <div class="container">
   <h2>Todo List</h2>
   <div class="input-group" style="margin-bottom:10px;">
-    <input type="text" class="form-control" placeholder="할일을 입력하세요">
+    <input type="text" class="form-control" 
+      placeholder="할일을 입력하세요" 
+      v-model="name" 
+      v-on:keyup.enter="createTodo(name)">
     <span class="input-group-btn">
-      <button class="btn btn-default" type="button">추가</button>
+      <button class="btn btn-default" type="button" 
+      @click="createTodo(name)">추가</button>
     </span>
   </div>
+  
   <ul class="list-group">
     <li :key="index" class="list-group-item" v-for="(todo, index) in todos">
     {{todo.name}}
@@ -20,7 +25,9 @@
           더보기<span class="caret"></span>
         </button>
         <ul class="dropdown-menu">
-          <li><a href="#" @click="deleteTodo(index)">삭제</a></li>
+          <li>
+            <a href="#" @click="deleteTodo(index)">삭제</a>
+          </li>
         </ul>
       </div>
     </li>
@@ -32,28 +39,18 @@
 export default {
   name: 'TodoPage',
   data () {
-    return {
-      todos: [
-        {
-          name:'청소'
-        },
-        {
-          name:'블로그 쓰기'
-        },
-        {
-          name:'밥먹기'
-        },
-        {
-          name:'안녕'
-        }
-      ]
-      ,
-      methods:{
+    return { todos: [{name:'청소'},{name:'블로그 쓰기'},{name:'밥먹기'},{name:'안녕'}] }
+  },
+  methods:{
 		deleteTodo(i){
 			this.todos.splice(i,1);
-		}
-	  }
+    },
+    createTodo(name){
+      if(name != null){
+        this.todos.push({name:name});
+        this.name = null;
+      }
     }
-  }
+	}
 }
 </script>
