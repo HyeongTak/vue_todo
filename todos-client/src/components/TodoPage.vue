@@ -24,6 +24,7 @@
         aria-expanded="false">
           더보기<span class="caret"></span>
         </button>
+
         <ul class="dropdown-menu">
           <li>
             <a href="#" @click="deleteTodo(index)">삭제</a>
@@ -47,8 +48,9 @@ export default {
     },
     createTodo(name){
       if(name != null){
-        this.todos.push({name:name});
-        this.name = null;
+        
+         this.todos.push({name:name});
+         this.name = null;
       }
     }
 	}
