@@ -2,13 +2,13 @@ var express = require('express');
 var router = express.Router();
 var Todos = require('../models/todo');
 
-router.get('/', function(req,res){
+router.get('/todos', function(req,res){
     Todos.find(function(err, todo){
         res.send(todo);
     });
 });
 
-router.post('/', function(req,res){
+router.post('/todos', function(req,res){
     var todo = new Todos();
     todo.name = req.name;
     todo.save(function(err){

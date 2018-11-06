@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/HyeongTak/vue_todo/issues"
   },
-  "homepage": "https://github.com/HyeongTak/vue_todo#readme"
+  "homepage": "https://github.com/HyeongTak/vue_todo#readme",
+  "devDependencies": {
+    "axios": "^0.18.0"
+  }
 }
