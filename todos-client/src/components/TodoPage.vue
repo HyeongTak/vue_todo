@@ -14,7 +14,7 @@
   <ul class="list-group">
     <li :key="index" class="list-group-item" v-for="(todo, index) in todos">
       {{todo.name}}
-      <div class="btn-group pull-right" 
+      <div class="btn-group pull-right"
         style="font-size: 12px; line-height: 1;">
         <button type="button" 
         class="btn-link dropdown-toggle" 
@@ -51,7 +51,7 @@ export default {
           vm.$http.delete('https://todos.garam.xyz/api/todos/'+todo.id)
           .then((result) => {
               obj.splice(i, 1)
-          })  
+          })
         }
       })
     },
@@ -59,19 +59,20 @@ export default {
       if(name != null){
         var vm = this;
         this.$http.defaults.headers.post['Content-Type'] = 'application/json';
-        this.$http.post('localhost:3000/api/todos',{
+        this.$http.post('/api/todos/',{
           name:name
-        }).then((result) => {
-            vm.todos.push(result.data);
+        }).then((res) => {
+            vm.todos.push(res);
         })
         this.name = null
       }
     },
     getTodos(){
       var vm = this;
-      this.$http.get('localhost:3000/api/todos')
-      .then((result) => {
-          vm.todos = result.data.data;
+      this.$http.get('/api/todos/')
+      .then((res) => {
+          vm.todos = res.data;
+          
       })
     }
   },
