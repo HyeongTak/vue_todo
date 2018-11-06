@@ -47,10 +47,13 @@ export default {
     deleteTodo(todo){
       var vm = this
       this.todos.forEach(function(_todo,i, obj){
-        if(_todo.id === todo.id){
-          vm.$http.delete('https://todos.garam.xyz/api/todos/'+todo.id)
-          .then((result) => {
-              obj.splice(i, 1)
+        if(_todo._id === todo._id){
+          console.log('1');
+          vm.$http.delete('/api/todos/'+todo._id)
+          .then((res) => {
+              console.log('2');
+              //obj.splice(i, 1)
+              this.getTodos();
           })
         }
       })
@@ -63,6 +66,7 @@ export default {
           name:name
         }).then((res) => {
             vm.todos.push(res);
+            this.getTodos();
         })
         this.name = null
       }
@@ -72,7 +76,7 @@ export default {
       this.$http.get('/api/todos/')
       .then((res) => {
           vm.todos = res.data;
-          
+          this.getTodos();
       })
     }
   },
