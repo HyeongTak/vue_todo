@@ -4,7 +4,6 @@ var path = require('path');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 
-var index = require('./router/index');
 var todos = require('./router/todos');
 
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -17,7 +16,14 @@ app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
 app.engine('html', require('ejs').renderFile);
 
-app.use('/', index);
-app.use('/api/todos', todos);
+var db = mongoose.connection;
+db.on('error', console.error);
+db.once('open', function(){
+    console.log("Connnected to mongod server");
+});
 
-module.exports = app;
+app.use('/api/todos',todos);
+
+var server = app.listen(3000, function(){
+    console.log("Express server has started on port 3000");
+});

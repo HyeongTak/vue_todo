@@ -59,7 +59,7 @@ export default {
       if(name != null){
         var vm = this;
         this.$http.defaults.headers.post['Content-Type'] = 'application/json';
-        this.$http.post('https://todos.garam.xyz/api/todos',{
+        this.$http.post('localhost:3000/api/todos',{
           name:name
         }).then((result) => {
             vm.todos.push(result.data);
@@ -69,7 +69,7 @@ export default {
     },
     getTodos(){
       var vm = this;
-      this.$http.get('https://todos.garam.xyz/api/todos')
+      this.$http.get('localhost:3000/api/todos')
       .then((result) => {
           vm.todos = result.data.data;
       })
